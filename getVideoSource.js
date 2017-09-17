@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         Get Video Source
 // @namespace    https://github.com/trunghaut1/GetVideoSource
-// @version      0.4
+// @version      0.5
 // @description  Get original video from online movie sites
 // @author       TrungHau
 // @include      https://phimbathu.com/xem-phim/*
 // @include      http://bilutv.com/xem-phim/*
 // @include      http://tvhay.org/xem-phim-*
+// @include      http://www.phimmoi.net/phim/*
 // @updateURL    https://raw.githubusercontent.com/trunghaut1/GetVideoSource/master/getVideoSource.js
 // @downloadURL  https://raw.githubusercontent.com/trunghaut1/GetVideoSource/master/getVideoSource.js
+// @encoding     utf-8
 // @grant        none
 // @grant          unsafeWindow
 // @grant          GM_xmlhttpRequest
@@ -24,7 +26,6 @@
 // @require      http://code.jquery.com/jquery-1.11.0.min.js
 // @homepage     https://trunghaut1.github.io/GetVideoSource/
 // ==/UserScript==
-
 function getDriveInfo(driveId) {
     return new Promise(function(resolve, reject) {
         gapi.client.init({
@@ -148,7 +149,7 @@ $(document).ready(function(){
         //Add link download button
         $(".option.col-lg-10.col-md-10.col-sm-8.col-xs-8").first().append(downLink);
     } else
-    if(location.href.indexOf("tvhay.org") > 0) {
+        if(location.href.indexOf("tvhay.org") > 0) {
         // Add download button
         $(".action").append(downBtn);
         $("#downBtn").click(getVideo);
@@ -157,5 +158,12 @@ $(document).ready(function(){
         downLink.style.cssText = "top:0; position: absolute; right: 0; height:16px; margin-top:-3px; margin-right:10px;";
         $("#detail").find(".blockbody").attr("style","position: relative;");
         $("#detail").find(".blockbody").append(downLink);
-    }
+    } else
+        if(location.href.indexOf("phimmoi.net") > 0) {
+            $("#btn-download").attr("href",null);
+            $("#btn-download").attr("target",null);
+            $("#btn-download").click(getVideo);
+            downLink.style.cssText = "top:0; position: absolute; right: 0; margin-right:5px; margin-top:5px;";
+            $(".box-rating").append(downLink);
+        }
 });
