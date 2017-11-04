@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Get Video Source
 // @namespace    https://github.com/trunghaut1/GetVideoSource
-// @version      0.5
+// @version      0.6
 // @description  Get original video from online movie sites
 // @author       TrungHau
 // @include      https://phimbathu.com/xem-phim/*
@@ -54,7 +54,7 @@ function checkSource()
 }
 function getDriveLink(source) {
     return new Promise((resolve, reject) =>
-                      $.get('http://quiztool.azurewebsites.net/getvideo.php', {driveUrl : source})
+                      $.get('https://quiztool.azurewebsites.net/getvideo.php', {driveUrl : source})
                            .done(resolve).fail(reject));
 }
 function getVideo() {
@@ -75,7 +75,7 @@ function getVideo() {
         }
         else $("#downLink").html("Không tìm thấy liên kết, vui lòng thử lại");
     };
-    
+
     switch(checkSource()) {
         case "drive" : // Get Google Drive source
             {
