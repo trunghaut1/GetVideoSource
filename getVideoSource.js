@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Get Video Source
 // @namespace    https://github.com/trunghaut1/GetVideoSource
-// @version      0.6
+// @version      0.7
 // @description  Get original video from online movie sites
 // @author       TrungHau
 // @include      https://phimbathu.com/xem-phim/*
 // @include      http://bilutv.com/xem-phim/*
 // @include      http://tvhay.org/xem-phim-*
 // @include      http://www.phimmoi.net/phim/*
+// @include      http://kzone.tv/vietsub*
 // @updateURL    https://raw.githubusercontent.com/trunghaut1/GetVideoSource/master/getVideoSource.js
 // @downloadURL  https://raw.githubusercontent.com/trunghaut1/GetVideoSource/master/getVideoSource.js
 // @encoding     utf-8
@@ -165,5 +166,14 @@ $(document).ready(function(){
             $("#btn-download").click(getVideo);
             downLink.style.cssText = "top:0; position: absolute; right: 0; margin-right:5px; margin-top:5px;";
             $(".box-rating").append(downLink);
-        }
+        } else
+            if(location.href.indexOf("kzone.tv") > 0) {
+                $("#downloadbox").empty();
+                downBtn.setAttribute("class", "btn btn-success");
+                $("#downloadbox").append(downBtn);
+                $("#downBtn").click(getVideo);
+                //Add link download button
+                downLink.setAttribute("class", "btn btn-info");
+                $(".server-name:first").append(downLink);
+               }
 });
